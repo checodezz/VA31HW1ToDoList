@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+
+<body class="container my-3">
+    <div>
+        <h1>Priority To-Do List</h1>
+    </div>
+    <div class="input-group">
+        <input class="form-control" placeholder="Add a new task" type="text" id="taskInput">
+
+        <select class="form-control" id="priorityInput">
+            <option value="Low">Low Priority</option>
+            <option value="Medium">Medium Priority</option>
+            <option value="High">High Priority</option>
+        </select>
+        <button class="btn btn-primary" id="addTodoBtn">Add</button>
+    </div>
+
+    <div class="row my-2 ">
+        <div class="col ">
+            <h2>Low Priority</h2>
+            <ul class=" list-group" id="lowPriorityTodo"></ul>
+        </div>
+
+        <div class="col">
+            <h2>Medium Priority</h2>
+            <ul class=" list-group" id="mediumPriorityTodo"></ul>
+        </div>
+
+        <div class="col">
+            <h2>High Priority</h2>
+            <ul class=" list-group" id="highPriorityTodo"></ul>
+        </div>
+
+    </div>
+    <script>
+        const taskInput = document.getElementById('taskInput')
+        const priorityInput = document.getElementById('priorityInput')
+        const addTodoBtn = document.getElementById('addTodoBtn')
+        const lowPriorityTodoUlist = document.getElementById('lowPriorityTodo')
+        const mediumPriorityTodoUlist = document.getElementById('mediumPriorityTodo')
+        const highPriorityTodoUlist = document.getElementById('highPriorityTodo')
+
+        addTodoBtn.addEventListener('click', function () {
+            const listItems = document.createElement(
+                'li') //if declared globally it gets updated everytime when i click add button
+
+            listItems.className = "list-group-item "
+
+
+            if (priorityInput.value === 'Low') {
+                createDeleteBtn()
+                lowPriorityTodoUlist.appendChild(listItems)
+
+            } else if (priorityInput.value === 'Medium') {
+                createDeleteBtn()
+                mediumPriorityTodoUlist.appendChild(listItems)
+
+            } else if (priorityInput.value === 'High') {
+                createDeleteBtn()
+                highPriorityTodoUlist.appendChild(listItems)
+            }
+
+            function createDeleteBtn() {
+                listItems.innerHTML =
+                    `<p class="d-flex justify-content-between align-items-center my-3">${taskInput.value} <button class=" btn btn-danger " onClick=deleteItemBtn(this)>Delete</button></p>`
+            }
+
+        })
+
+
+        function deleteItemBtn(deleteBtn) {
+            const listItem = deleteBtn.parentElement.parentElement
+            listItem.remove()
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
